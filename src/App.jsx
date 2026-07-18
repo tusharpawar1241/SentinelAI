@@ -4,16 +4,12 @@ import IncidentFeed from './components/IncidentFeed';
 import AuditReport from './components/AuditReport';
 import { 
   ShieldAlert, 
-  ShieldCheck, 
   Play, 
-  AlertTriangle, 
   Activity, 
-  RefreshCw, 
   Lock, 
   Server 
 } from 'lucide-react';
 
-// Static preset scenarios matching backend simulator
 const SCENARIOS = {
   Standard_Corporate_Activity: [
     {
@@ -99,7 +95,7 @@ const SCENARIOS = {
 };
 
 export default function App() {
-  const [executionState, setExecutionState] = useState('idle'); // 'idle', 'processing', 'complete'
+  const [executionState, setExecutionState] = useState('idle');
   const [activeStep, setActiveStep] = useState(0);
   const [activeScenario, setActiveScenario] = useState(null);
   const [stateData, setStateData] = useState({
@@ -120,7 +116,6 @@ export default function App() {
 
     const logs = SCENARIOS[scenarioName];
 
-    // Reset initial view
     setStateData({
       raw_logs: logs,
       anomaly_score: 0.0,
@@ -133,10 +128,8 @@ export default function App() {
     });
 
     try {
-      // Step animation delay
       const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
-      // Attempt API call to backend engine
       const response = await fetch('http://127.0.0.1:8000/api/analyze-telemetry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -149,7 +142,6 @@ export default function App() {
       if (response.ok) {
         const result = await response.json();
 
-        // Animate progression step by step for judges
         for (let step = 0; step < 5; step++) {
           setActiveStep(step);
           await delay(600);
@@ -161,7 +153,6 @@ export default function App() {
         throw new Error('Backend response not OK');
       }
     } catch (err) {
-      // Fallback client simulation if backend server is offline
       console.warn('Backend endpoint unreachable. Operating in local replay mode.', err);
       simulateClientSideFlow(scenarioName, logs);
     }
@@ -172,7 +163,6 @@ export default function App() {
 
     const isAttack = scenarioName === 'APT_Credential_Exfiltration_2AM';
 
-    // Step 0: Behavior
     setActiveStep(0);
     await delay(700);
     const bhState = {
@@ -191,7 +181,6 @@ export default function App() {
       ]
     };
 
-    // Step 1: Threat RAG
     setActiveStep(1);
     await delay(700);
     const mitre = isAttack ? [
@@ -200,14 +189,12 @@ export default function App() {
       { technique_id: "T1048", tactic_name: "Exfiltration", severity: "CRITICAL", summary: "High-volume outbound POST connection spike targeting foreign server." }
     ] : [];
 
-    // Step 2: Prediction
     setActiveStep(2);
     await delay(700);
     const pred = isAttack ? [
       { target_node: "External Command & Control Server", predicted_technique: "T1048 (Exfiltration Over Alternative Protocol)", likelihood: 0.95, justification: "Threat actor mapped administrative database layers. Imminent exfiltration expected." }
     ] : [];
 
-    // Step 3: SOAR Response
     setActiveStep(3);
     await delay(700);
     const soar = isAttack ? [
@@ -216,14 +203,13 @@ export default function App() {
       { action: "ISOLATE_HOST: External-Gateway-VPN", status: "EXECUTED", timestamp: new Date().toISOString() }
     ] : [];
 
-    // Step 4: Report Compiler
     setActiveStep(4);
     await delay(700);
     const summary = isAttack ? `# SentinelAI Executive Security Brief
 Generated: ${new Date().toISOString()}
 
 ## 1. System Security Index
-* **Security Status:** 🔴 CRITICAL THREAT DETECTED
+* **Security Status:** CRITICAL THREAT DETECTED
 * **Global Anomaly Score:** 100.0%
 * **Active Isolation Alerts:** 3
 
@@ -252,7 +238,7 @@ Generated: ${new Date().toISOString()}
 Generated: ${new Date().toISOString()}
 
 ## 1. System Security Index
-* **Security Status:** 🟢 SYSTEM STABLE & SAFE
+* **Security Status:** SYSTEM STABLE & SAFE
 * **Global Anomaly Score:** 28.0%
 * **Active Isolation Alerts:** 0
 
@@ -283,11 +269,9 @@ All telemetry logs align within expected business hours and benign operational f
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans p-4 md:p-6 flex flex-col gap-5">
-      {/* Top Metrics & Control Header Bar */}
       <header className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:px-6 shadow-2xl backdrop-blur-lg flex flex-col lg:flex-row items-center justify-between gap-4">
-        {/* Branding & Subtitle */}
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-linear-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/20">
+          <div className="p-2.5 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/20">
             <ShieldAlert className="w-6 h-6 text-white" />
           </div>
           <div>
@@ -301,9 +285,7 @@ All telemetry logs align within expected business hours and benign operational f
           </div>
         </div>
 
-        {/* Top Metric Cards */}
         <div className="flex items-center gap-3 flex-wrap justify-center">
-          {/* System Health */}
           <div className="px-3.5 py-2 rounded-xl bg-slate-950/60 border border-slate-800/80 flex items-center gap-2.5">
             <Server className="w-4 h-4 text-slate-400" />
             <div>
@@ -312,7 +294,6 @@ All telemetry logs align within expected business hours and benign operational f
             </div>
           </div>
 
-          {/* Active Isolation Alerts */}
           <div className="px-3.5 py-2 rounded-xl bg-slate-950/60 border border-slate-800/80 flex items-center gap-2.5">
             <Lock className="w-4 h-4 text-amber-400" />
             <div>
@@ -323,7 +304,6 @@ All telemetry logs align within expected business hours and benign operational f
             </div>
           </div>
 
-          {/* Threat Index Badge */}
           <div className="px-3.5 py-2 rounded-xl bg-slate-950/60 border border-slate-800/80 flex items-center gap-2.5">
             <Activity className="w-4 h-4 text-indigo-400" />
             <div>
@@ -335,7 +315,6 @@ All telemetry logs align within expected business hours and benign operational f
           </div>
         </div>
 
-        {/* Trigger Interactive Simulation Buttons */}
         <div className="flex items-center gap-2.5">
           <button
             onClick={() => runSimulation('Standard_Corporate_Activity')}
@@ -357,9 +336,7 @@ All telemetry logs align within expected business hours and benign operational f
         </div>
       </header>
 
-      {/* Main Balanced 3-Column Cockpit Layout Grid */}
       <main className="grid grid-cols-1 lg:grid-cols-12 gap-5 flex-1 min-h-[640px]">
-        {/* Left Column (Pipeline Flow): 3 cols */}
         <div className="lg:col-span-3">
           <PipelineFlow 
             executionState={executionState}
@@ -368,7 +345,6 @@ All telemetry logs align within expected business hours and benign operational f
           />
         </div>
 
-        {/* Center Column (Incident Feed): 5 cols */}
         <div className="lg:col-span-5">
           <IncidentFeed 
             logs={stateData.raw_logs}
@@ -377,7 +353,6 @@ All telemetry logs align within expected business hours and benign operational f
           />
         </div>
 
-        {/* Right Column (Audit Report & Markdown): 4 cols */}
         <div className="lg:col-span-4">
           <AuditReport 
             summary={stateData.final_executive_summary}

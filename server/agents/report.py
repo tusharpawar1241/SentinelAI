@@ -95,13 +95,13 @@ def get_fallback_markdown(state: SentinelAgentState) -> str:
     actions = state.get("remediation_actions", [])
     audit = state.get("audit_trail", [])
     
-    status_emoji = "🔴 CRITICAL THREAT DETECTED" if is_threat else "🟢 SYSTEM STABLE & SAFE"
+    status_text = "CRITICAL THREAT DETECTED" if is_threat else "SYSTEM STABLE & SAFE"
     
     md = f"""# SentinelAI Executive Security Brief
 Generated: {datetime.datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')} UTC
 
 ## 1. System Security Index
-*   **Security Status:** **{status_emoji}**
+*   **Security Status:** **{status_text}**
 *   **Global Anomaly Score:** `{anomaly_score*100:.1f}%`
 *   **Active Isolation Alerts:** `{len(actions)}`
 
