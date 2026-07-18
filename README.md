@@ -1,16 +1,171 @@
-# React + Vite
+# SentinelAI: Autonomous Multi-Agent Cyber Resilience Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> **Target Platform:** Economic Times AI Hackathon 2.0 (Problem Statement 7: AI-Driven Cyber Resilience for Critical National Infrastructure)  
+> **Built for:** Critical National Infrastructure (CNI), Government Public Sector Networks, and Enterprise IT/OT Architectures.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛡️ What is SentinelAI?
 
-## React Compiler
+**SentinelAI** is an autonomous multi-agent cyber defense orchestration platform designed to protect Critical National Infrastructure (such as CBSE examination databases, AIIMS healthcare systems, power grids, and smart cities) from low-and-slow **Advanced Persistent Threats (APTs)**.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### The Problem It Solves
+Traditional security relies on known malware signatures. However, sophisticated cyber actors infiltration operates using "low-and-slow" techniques (like stolen admin credentials or living-off-the-land PowerShell commands). By the time a signature exists, the attack has already succeeded. 
 
-## Expanding the Oxlint configuration
+SentinelAI introduces an **Unsupervised Behavioral Intelligence Layer**. It detects anomalies based on how systems normally behave—compressing the time from initial compromise to detection and response **from weeks down to seconds**.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+---
+
+## ❓ Frequently Asked Questions for New Readers
+
+### Who is this platform built for?
+SentinelAI is designed for **large-scale enterprise architectures and public sector networks**. It is used by CNI operators, security analysts, and IT administrators to protect interconnected servers, databases, domain controllers, and VPN gateways.
+
+### Does it secure my personal laptop?
+* **As a standalone personal antivirus app?** No. SentinelAI is not a simple desktop antivirus (like Norton or Windows Defender).
+* **As part of a corporate/government network?** **YES!** Your laptop connects to the organization as an *Endpoint Node*. SentinelAI ingests telemetry logs from hundreds or thousands of laptops and servers simultaneously. If a hacker breaches your laptop at 2:00 AM, SentinelAI detects the abnormal behavior on your laptop and isolates it from the network before the attacker can reach sensitive core databases.
+
+---
+
+## 🧠 5-Agent Architecture (How It Works)
+
+SentinelAI replaces slow, manual SOC (Security Operations Center) triage with a 5-node sequential multi-agent graph chain:
+
+```mermaid
+graph TD
+    A[Telemetry Ingestion Payload] --> B[1. Behavioral Anomaly Engine]
+    B --> C[2. Semantic Threat Intel RAG]
+    C --> D[3. Attack Path Predictor]
+    D --> E[4. SOAR Response Orchestrator]
+    E --> F[5. Cryptographic Audit Archiver]
+    F --> G[React Cockpit UI Dashboard]
+```
+
+| Agent Node | Technology | Core Function |
+| :--- | :--- | :--- |
+| **1. Behavioral Anomaly Engine** | `scikit-learn` Isolation Forest | Evaluates log vectors (`hour_of_day`, `command_line_length`, `is_external_ip`) without needing malware signatures to flag abnormal behavior. |
+| **2. Semantic Threat Intel RAG** | Google GenAI SDK (`gemini-2.5-flash`) | Maps flagged log anomalies to official **MITRE ATT&CK** techniques (e.g. `T1003 Credential Dumping`, `T1021 Lateral Movement`, `T1048 Exfiltration`). |
+| **3. Proactive Path Predictor** | Rules & Graph Trajectory Engine | Calculates imminent next-stage threat actor moves with likelihood percentages (e.g., predicting 95% exfiltration probability). |
+| **4. SOAR Response Orchestrator** | Automated Security Playbooks | Evaluates threat confidence against a pre-approved safety threshold (85%). Executes reactive containment (`BLOCK_IP: 198.51.100.72`, `ISOLATE_HOST`). |
+| **5. Cryptographic Audit Archiver** | Gemini GenAI Markdown Compiler | Compiles a step-by-step non-repudiable audit log trail and an executive Markdown security brief for security teams and hackathon judges. |
+
+---
+
+## 🖥️ User Interface & Telemetry Replay Engine
+
+Built with **React 19** and **Tailwind CSS**, the interface provides a high-density, dark-mode cyber cockpit split into a balanced 3-column grid layout:
+
+1. **Top Metrics Bar:** Displays real-time System Health (`ONLINE`), Active Isolation Alerts, and overall Infrastructure Threat Index (`LOW` vs `CRITICAL / APT THREAT`).
+2. **Left Column (`PipelineFlow`):** Displays visual progress for the 5 agents (`Idle`, `Processing`, `Complete`) with real-time confidence readouts.
+3. **Center Column (`IncidentFeed`):** Displays chronological log telemetry cards, highlighting rogue IPs (`198.51.100.72`), suspicious commands (`dump_lsass.ps1`), and MITRE ATT&CK badges (`T1003`, `T1021`, `T1048`).
+4. **Right Column (`AuditReport`):** Renders the Executive Security Brief in clean Markdown alongside an immutable step-by-step transaction validation log trail.
+5. **Interactive Replay Buttons:**
+   * 🟢 **Run Normal Activity Profile:** Replays benign daytime intranet traffic (`0%` threat index).
+   * 🔴 **Execute 2:00 AM Attack Infiltration Simulation:** Replays a 4-stage APT attack timeline (Admin login from rogue IP -> PowerShell LSASS dump -> Database share mapping -> Outbound POST spike), activating all 5 agents and executing autonomous SOAR containment within seconds.
+
+---
+
+## 🚀 Step-by-Step Installation & Quickstart Guide
+
+### Prerequisites
+* **Python 3.10+**
+* **Node.js 18+** & **npm**
+
+---
+
+### Step 1: Clone the Repository
+```powershell
+git clone https://github.com/tusharpawar1241/SentinelAI.git
+cd SentinelAI
+```
+
+---
+
+### Step 2: Initialize Python Virtual Environment & Dependencies
+```powershell
+# Create Python virtual environment
+python -m venv .venv
+
+# Activate environment (Windows PowerShell)
+.\.venv\Scripts\Activate.ps1
+
+# Install backend Python dependencies
+.\.venv\Scripts\pip install -r requirements.txt
+```
+
+---
+
+### Step 3: Install Node.js Frontend Dependencies
+```powershell
+npm install
+```
+
+---
+
+### Step 4: (Optional) Configure Gemini API Key
+SentinelAI includes built-in offline fallback heuristics so you can run and test everything out of the box. To enable live GenAI RAG mapping with Gemini:
+```powershell
+# Windows PowerShell
+$env:GEMINI_API_KEY="your-google-gemini-api-key"
+```
+
+---
+
+### Step 5: Launch the Servers
+
+#### 1. Start the FastAPI Backend Server:
+```powershell
+.\.venv\Scripts\python -m uvicorn server.main:app --reload --port 8000
+```
+*Backend API will run at `http://127.0.0.1:8000/`.*
+
+#### 2. Start the React Frontend Cockpit:
+In a new terminal window, run:
+```powershell
+npm run dev
+```
+*Frontend UI will run at `http://localhost:5173/`.*
+
+Open **`http://localhost:5173/`** in your web browser to view and interact with the SentinelAI dashboard!
+
+---
+
+## 📂 Codebase Directory Layout Matrix
+
+```text
+sentinel-ai-core/
+├── server/
+│   ├── __init__.py
+│   ├── main.py            # FastAPI Application & Router Endpoints (/api/analyze-telemetry)
+│   ├── schemas.py         # Pydantic Core Models (SecurityLog, LogIngestionPayload, AgentDecisionStep)
+│   ├── orchestrator.py    # Shared LangGraph Engine State Machine (SentinelAgentState)
+│   ├── simulator.py       # Simulated Ingestion Scenarios (Normal vs 2AM Attack logs)
+│   └── agents/
+│       ├── __init__.py
+│       ├── behavior.py    # Behavioral Anomaly Engine (Unsupervised Isolation Forest)
+│       ├── threat_rag.py  # Semantic Threat Intel RAG (Gemini API + MITRE ATT&CK Mapping)
+│       ├── prediction.py  # Proactive Attack Path Predictor
+│       ├── response.py    # Mock SOAR Network Action Execution Handler
+│       └── report.py      # Markdown Audit Trail Brief Compiler
+├── src/
+│   ├── App.jsx            # Main Cockpit Dashboard Layout Orchestrator & Controls
+│   ├── index.css          # Core Tailwind CSS & Glassmorphism Styling
+│   └── components/
+│       ├── PipelineFlow.jsx   # 5-Agent Execution State Matrix View
+│       ├── IncidentFeed.jsx   # Chronological Incident Alert Lists & MITRE Badges
+│       └── AuditReport.jsx    # Executive Markdown Brief & Immutable Audit Log Trail
+├── requirements.txt       # Pinned Python Dependencies
+└── package.json           # Front-End Node.js Dependencies
+```
+
+---
+
+## 🏆 Hackathon Evaluation Matrix
+
+| Judging Criteria (Weight) | Fulfillment in SentinelAI |
+| :--- | :--- |
+| **Technical Excellence (25%)** | 5-agent LangGraph sequential state machine combining unsupervised Isolation Forest ML with Gemini GenAI LLM RAG. |
+| **Business Impact (25%)** | Compresses Mean Time To Detect (MTTD) and Respond (MTTR) from weeks to seconds via autonomous SOAR containment. |
+| **Scalability (20%)** | Pydantic strict data validation, FastAPI async web router, and modular agent boundaries preventing context drift. |
+| **User Experience (15%)** | React 19 + Tailwind CSS dark cockpit interface with Top Metrics Bar, Pipeline Flow, Incident Feed, and Audit Report. |
+| **Innovation (15%)** | Proactive attack trajectory prediction paired with an immutable audit log trail for non-repudiable judge inspection. |
