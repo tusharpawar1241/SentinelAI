@@ -33,7 +33,6 @@ export default function IncidentFeed({ logs, mitreMappings, isThreatDetected }) 
       cmd.includes('curl') ||
       cmd.includes('net use') ||
       (!ip.startsWith('10.') && !ip.startsWith('192.168.')) ||
-      log.event_id === 4688 ||
       log.event_id === 5038
     );
   };

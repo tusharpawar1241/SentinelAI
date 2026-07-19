@@ -271,7 +271,7 @@ All telemetry logs align within expected business hours and benign operational f
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans p-4 md:p-6 flex flex-col gap-5">
       <header className="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 md:px-6 shadow-2xl backdrop-blur-lg flex flex-col lg:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/20">
+          <div className="p-2.5 rounded-xl bg-linear-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/20">
             <ShieldAlert className="w-6 h-6 text-white" />
           </div>
           <div>
