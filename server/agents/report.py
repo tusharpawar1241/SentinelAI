@@ -52,11 +52,12 @@ def report_compiler_agent(state: SentinelAgentState) -> Dict[str, Any]:
     reasoning = ""
     
     api_key = get_api_key()
+    model_name = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
     if api_key:
         try:
             genai.configure(api_key=api_key)
             model = genai.GenerativeModel(
-                model_name="gemini-2.5-flash",
+                model_name=model_name,
                 system_instruction=SYSTEM_INSTRUCTION
             )
             response = model.generate_content(prompt)

@@ -56,7 +56,7 @@ SentinelAI replaces manual SOC monitoring with a 5-node sequential multi-agent g
 | Agent Node | Technology | Core Function |
 | :--- | :--- | :--- |
 | 1. Behavioral Anomaly Engine | scikit-learn Isolation Forest | Evaluates log vectors (`hour_of_day`, `command_line_length`, `is_external_ip`) without needing malware signatures to flag abnormal behavior. |
-| 2. Semantic Threat Intel RAG | Google GenAI SDK (`gemini-2.5-flash`) | Maps flagged log anomalies to official MITRE ATT&CK techniques (e.g. `T1003 Credential Dumping`, `T1021 Lateral Movement`, `T1048 Exfiltration`). |
+| 2. Semantic Threat Intel RAG | Google GenAI SDK (`gemini-3.5-flash`) | Maps flagged log anomalies to official MITRE ATT&CK techniques (e.g. `T1003 Credential Dumping`, `T1021 Lateral Movement`, `T1048 Exfiltration`). |
 | 3. Proactive Path Predictor | Rules & Graph Trajectory Engine | Calculates imminent next-stage threat actor moves with likelihood percentages (e.g., predicting 95% exfiltration probability). |
 | 4. SOAR Response Orchestrator | Automated Security Playbooks | Evaluates threat confidence against a pre-approved safety threshold (85%). Executes reactive containment (`BLOCK_IP: 198.51.100.72`, `ISOLATE_HOST`). |
 | 5. Cryptographic Audit Archiver | Gemini GenAI Markdown Compiler | Compiles a step-by-step non-repudiable audit log trail and an executive Markdown security brief for security teams. |
