@@ -7,10 +7,9 @@ import google.generativeai as genai
 from ..orchestrator import SentinelAgentState
 from ..schemas import AgentDecisionStep
 
-# Configure Gemini API Key
-api_key = os.environ.get("GEMINI_API_KEY")
-if api_key:
-    genai.configure(api_key=api_key)
+# Configure Gemini API Key dynamically at runtime
+def get_api_key():
+    return os.environ.get("GEMINI_API_KEY")
 
 # Pydantic schemas for Gemini Structured Output
 class MitreMapping(BaseModel):
@@ -73,9 +72,10 @@ def threat_intelligence_agent(state: SentinelAgentState) -> Dict[str, Any]:
     confidence = 0.95
     reasoning = ""
 
-    # If API key is available, make the actual call
+    api_key = get_api_key()
     if api_key:
         try:
+            genai.configure(api_key=api_key)
             model = genai.GenerativeModel(
                 model_name="gemini-2.5-flash",
                 system_instruction=SYSTEM_INSTRUCTION

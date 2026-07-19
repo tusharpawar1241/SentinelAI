@@ -1,6 +1,11 @@
+import os
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Any
+
+# Load environment variables from .env file if present
+load_dotenv()
 
 from .schemas import LogIngestionPayload
 from .orchestrator import SentinelAgentState

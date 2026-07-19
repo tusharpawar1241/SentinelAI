@@ -6,10 +6,9 @@ import google.generativeai as genai
 from ..orchestrator import SentinelAgentState
 from ..schemas import AgentDecisionStep
 
-# Configure Gemini
-api_key = os.environ.get("GEMINI_API_KEY")
-if api_key:
-    genai.configure(api_key=api_key)
+# Configure Gemini API key dynamically
+def get_api_key():
+    return os.environ.get("GEMINI_API_KEY")
 
 SYSTEM_INSTRUCTION = """
 You are the SentinelAI Cryptographic Audit Archiver and Reporting Agent.
@@ -52,8 +51,10 @@ def report_compiler_agent(state: SentinelAgentState) -> Dict[str, Any]:
     confidence = 0.95
     reasoning = ""
     
+    api_key = get_api_key()
     if api_key:
         try:
+            genai.configure(api_key=api_key)
             model = genai.GenerativeModel(
                 model_name="gemini-2.5-flash",
                 system_instruction=SYSTEM_INSTRUCTION
