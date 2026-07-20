@@ -53,7 +53,7 @@ export default function IncidentFeed({ logs, mitreMappings, isThreatDetected }) 
 
   if (!logs || logs.length === 0) {
     return (
-      <div className="glass-panel rounded-2xl p-8 border border-slate-800 shadow-xl flex flex-col items-center justify-center text-center h-full min-h-[450px]">
+      <div className="glass-panel rounded-2xl p-8 border border-slate-800 shadow-xl flex flex-col items-center justify-center text-center h-full min-h-112.5">
         <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-slate-600 mb-3">
           <ShieldCheck className="w-12 h-12 text-slate-700" />
         </div>
@@ -163,7 +163,7 @@ export default function IncidentFeed({ logs, mitreMappings, isThreatDetected }) 
       )}
 
       {/* Log Feed Stream List */}
-      <div className="flex-1 overflow-y-auto space-y-3.5 pr-1 max-h-[580px] custom-scrollbar">
+      <div className="flex-1 overflow-y-auto space-y-3.5 pr-1 max-h-145 custom-scrollbar">
         {filteredLogs.map((log, index) => {
           const suspicious = isSuspiciousLog(log);
           const isExternal = log.source_ip && !log.source_ip.startsWith('10.') && !log.source_ip.startsWith('192.168.');

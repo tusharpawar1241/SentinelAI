@@ -299,7 +299,7 @@ All telemetry logs align within expected business hours and benign operational f
             />
 
             {/* Upper Metrics Grid: Risk Gauge & MITRE Matrix */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 min-h-[300px]">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 min-h-75">
               <div className="lg:col-span-4">
                 <RiskGaugeCard 
                   anomalyScore={stateData.anomaly_score} 
@@ -317,7 +317,7 @@ All telemetry logs align within expected business hours and benign operational f
             </div>
 
             {/* Lower Metrics Grid: SOAR Hub & Predictive Attack Trajectory */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 min-h-[260px]">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 min-h-65">
               <div className="lg:col-span-6">
                 <SoarActionsHub 
                   remediationActions={stateData.remediation_actions} 
@@ -335,7 +335,7 @@ All telemetry logs align within expected business hours and benign operational f
 
         {/* Tab 2: Telemetry Explorer */}
         {activeTab === 'telemetry' && (
-          <div className="flex-1 min-h-[640px]">
+          <div className="flex-1 min-h-160">
             <IncidentFeed 
               logs={stateData.raw_logs}
               mitreMappings={stateData.mitre_mappings}
@@ -346,7 +346,7 @@ All telemetry logs align within expected business hours and benign operational f
 
         {/* Tab 3: Multi-Agent Network */}
         {activeTab === 'agents' && (
-          <div className="flex-1 min-h-[640px]">
+          <div className="flex-1 min-h-160">
             <PipelineFlow 
               executionState={executionState}
               activeStep={activeStep}
@@ -357,7 +357,7 @@ All telemetry logs align within expected business hours and benign operational f
 
         {/* Tab 4: Executive Brief & Audit Report */}
         {activeTab === 'report' && (
-          <div className="flex-1 min-h-[640px]">
+          <div className="flex-1 min-h-160">
             <AuditReport 
               summary={stateData.final_executive_summary}
               auditTrail={stateData.audit_trail}

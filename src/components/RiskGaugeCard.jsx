@@ -83,7 +83,7 @@ export default function RiskGaugeCard({ anomalyScore, isThreatDetected, executio
         </Tooltip>
 
         {/* Risk Level Description */}
-        <div className="flex flex-col gap-2 max-w-[150px]">
+        <div className="flex flex-col gap-2 max-w-37.5">
           <div className="text-[10px] uppercase font-bold text-slate-400">Risk Assessment</div>
           <div className="flex items-center gap-1.5">
             {isThreatDetected ? (

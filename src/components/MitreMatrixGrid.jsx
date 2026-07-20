@@ -5,7 +5,7 @@ import Tooltip from './Tooltip';
 export default function MitreMatrixGrid({ mitreMappings, isThreatDetected }) {
   if (!mitreMappings || mitreMappings.length === 0) {
     return (
-      <div className="glass-panel rounded-2xl p-5 border border-slate-800 shadow-xl flex flex-col items-center justify-center text-center h-full min-h-[220px]">
+      <div className="glass-panel rounded-2xl p-5 border border-slate-800 shadow-xl flex flex-col items-center justify-center text-center h-full min-h-55">
         <CheckCircle2 className="w-10 h-10 text-emerald-500/40 mb-2" />
         <h3 className="text-sm font-bold text-slate-300">No MITRE ATT&CK Threats Detected</h3>
         <p className="text-xs text-slate-500 max-w-sm mt-1">

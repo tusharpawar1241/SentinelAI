@@ -5,7 +5,7 @@ import Tooltip from './Tooltip';
 export default function PredictiveTrajectoryCard({ predictedMoves }) {
   if (!predictedMoves || predictedMoves.length === 0) {
     return (
-      <div className="glass-panel rounded-2xl p-5 border border-slate-800 shadow-xl flex flex-col items-center justify-center text-center h-full min-h-[180px]">
+      <div className="glass-panel rounded-2xl p-5 border border-slate-800 shadow-xl flex flex-col items-center justify-center text-center h-full min-h-45">
         <CheckCircle2 className="w-9 h-9 text-slate-700 mb-2" />
         <h3 className="text-sm font-bold text-slate-400">No Attack Trajectory Predicted</h3>
         <p className="text-xs text-slate-500 mt-1">Attack path prediction engine evaluates graph trajectories when anomalous vectors emerge.</p>

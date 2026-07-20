@@ -97,7 +97,7 @@ export default function AuditReport({ summary, auditTrail }) {
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto pr-1 max-h-[600px] custom-scrollbar">
+      <div className="flex-1 overflow-y-auto pr-1 max-h-150 custom-scrollbar">
         {activeSubTab === 'brief' ? (
           summary ? (
             <div className="prose prose-invert prose-sm max-w-none text-slate-200 p-6 rounded-2xl bg-slate-950/70 border border-slate-800/90 font-sans leading-relaxed shadow-inner">

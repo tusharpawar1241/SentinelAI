@@ -130,7 +130,7 @@ export default function PipelineFlow({ executionState, activeStep, stateData }) 
         </span>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 flex-1 min-h-[520px]">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 flex-1 min-h-130">
         {/* Left Col: Interactive Node Stack */}
         <div className="lg:col-span-5 space-y-3.5">
           {AGENTS.map((agent, index) => {
@@ -151,7 +151,7 @@ export default function PipelineFlow({ executionState, activeStep, stateData }) 
               >
                 {/* Connector Line */}
                 {index < AGENTS.length - 1 && (
-                  <div className={`absolute left-7 bottom-[-14px] w-0.5 h-3.5 z-10 ${
+                  <div className={`absolute left-7 -bottom-3.5 w-0.5 h-3.5 z-10 ${
                     status === 'complete' ? 'bg-emerald-500' : 'bg-slate-800'
                   }`} />
                 )}
