@@ -20,7 +20,7 @@ To satisfy the **User Experience (15%)** criteria, the interface is split cleanl
 The target codebase directory matrix must follow this layout pattern exactly:
 ```text
 sentinel-ai-core/
-├── server/
+├── sentinel_engine/
 │   ├── __init__.py
 │   ├── main.py            # FastAPI Entry Point and Router Handlers
 │   ├── schemas.py         # Data Validation Models (Pydantic Core Structures)

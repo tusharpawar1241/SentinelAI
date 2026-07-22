@@ -127,7 +127,7 @@ $env:GEMINI_API_KEY="your-google-gemini-api-key"
 
 #### 1. Start the FastAPI Backend Server:
 ```powershell
-.\.venv\Scripts\python -m uvicorn server.main:app --reload --port 8000
+.\.venv\Scripts\python -m uvicorn sentinel_engine.main:app --reload --port 8000
 ```
 Backend API will run at `http://127.0.0.1:8000/`.
 
@@ -146,7 +146,7 @@ Open `http://localhost:5173/` in your web browser to view and interact with the 
 
 ```text
 sentinel-ai-core/
-├── server/
+├── sentinel_engine/
 │   ├── __init__.py
 │   ├── main.py            # FastAPI Application & Router Endpoints (/api/analyze-telemetry)
 │   ├── schemas.py         # Pydantic Core Models (SecurityLog, LogIngestionPayload, AgentDecisionStep)
