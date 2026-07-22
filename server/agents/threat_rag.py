@@ -1,7 +1,10 @@
 import os
 import datetime
+import warnings
 from typing import Dict, Any, List
 from pydantic import BaseModel, Field
+
+warnings.filterwarnings("ignore", category=FutureWarning)
 import google.generativeai as genai
 
 from ..orchestrator import SentinelAgentState
@@ -73,7 +76,7 @@ def threat_intelligence_agent(state: SentinelAgentState) -> Dict[str, Any]:
     reasoning = ""
 
     api_key = get_api_key()
-    model_name = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
+    model_name = os.environ.get("GEMINI_MODEL", "gemini-1.5-flash")
     if api_key:
         try:
             genai.configure(api_key=api_key)
@@ -86,7 +89,8 @@ def threat_intelligence_agent(state: SentinelAgentState) -> Dict[str, Any]:
                 generation_config={
                     "response_mime_type": "application/json",
                     "response_schema": MitreMappingList
-                }
+                },
+                request_options={"timeout": 5.0}
             )
             # Parse the structured response
             parsed = MitreMappingList.model_validate_json(response.text)

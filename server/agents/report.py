@@ -1,6 +1,9 @@
 import os
 import datetime
+import warnings
 from typing import Dict, Any
+
+warnings.filterwarnings("ignore", category=FutureWarning)
 import google.generativeai as genai
 
 from ..orchestrator import SentinelAgentState
@@ -52,7 +55,7 @@ def report_compiler_agent(state: SentinelAgentState) -> Dict[str, Any]:
     reasoning = ""
     
     api_key = get_api_key()
-    model_name = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
+    model_name = os.environ.get("GEMINI_MODEL", "gemini-1.5-flash")
     if api_key:
         try:
             genai.configure(api_key=api_key)
@@ -60,7 +63,7 @@ def report_compiler_agent(state: SentinelAgentState) -> Dict[str, Any]:
                 model_name=model_name,
                 system_instruction=SYSTEM_INSTRUCTION
             )
-            response = model.generate_content(prompt)
+            response = model.generate_content(prompt, request_options={"timeout": 5.0})
             summary_md = response.text
             reasoning = "Successfully compiled executive brief via Gemini GenAI reporting interface."
         except Exception as e:
