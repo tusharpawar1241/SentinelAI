@@ -162,8 +162,8 @@ export default function IncidentFeed({ logs, mitreMappings, isThreatDetected }) 
         </div>
       )}
 
-      {/* Log Feed Stream List */}
-      <div className="flex-1 overflow-y-auto space-y-3.5 pr-1 max-h-145 custom-scrollbar">
+      {/* Log Feed Items */}
+      <div className="flex-1 overflow-y-auto space-y-3.5 pr-1 max-h-[520px] custom-scrollbar">
         {filteredLogs.map((log, index) => {
           const suspicious = isSuspiciousLog(log);
           const isExternal = log.source_ip && !log.source_ip.startsWith('10.') && !log.source_ip.startsWith('192.168.');

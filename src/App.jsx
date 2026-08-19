@@ -361,6 +361,11 @@ All telemetry logs align within expected business hours and benign operational f
             <AuditReport 
               summary={stateData.final_executive_summary}
               auditTrail={stateData.audit_trail}
+              mitreMappings={stateData.mitre_mappings}
+              predictedMoves={stateData.predicted_next_moves}
+              soarActions={stateData.remediation_actions}
+              isThreatDetected={stateData.is_threat_detected}
+              anomalyScore={stateData.anomaly_score}
             />
           </div>
         )}
