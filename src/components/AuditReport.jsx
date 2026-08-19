@@ -114,7 +114,7 @@ export default function AuditReport({ summary, auditTrail, mitreMappings = [], p
       </div>
 
       {/* Main Content Area - Bounded height with custom scrollbar */}
-      <div className="flex-1 overflow-y-auto pr-1 max-h-[520px] min-h-[380px] custom-scrollbar">
+      <div className="flex-1 overflow-y-auto pr-1 max-h-130 min-h-95 custom-scrollbar">
         {/* SUBTAB 1: Structured Executive Overview */}
         {activeSubTab === 'executive' && (
           summary ? (
